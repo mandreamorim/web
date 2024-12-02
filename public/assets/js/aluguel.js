@@ -30,7 +30,7 @@ function alugas() {
 }
 
 function redirecionarParaCheck() {
-    history.pushState(null, '', '/aluguelCheck.html');
+    history.pushState(null, '', '/aluguelcheck.html');
     location.reload()
 }
 
