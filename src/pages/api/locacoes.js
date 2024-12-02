@@ -17,7 +17,19 @@ export default async function handler(req, res) {
 }
 
 async function get(req, res) {
-    return res.status(404).json();
+    const { id_livro, id_aluno } = req.query;
+    if (!id_livro && !id_aluno ) {
+        return res.status(400).json({ message: "Campos insuficientes" });
+    }
+    if(id_livro){
+        const [rows] = await db.execute("SELECT * FROM locacoes WHERE id_livro = ?", [id_livro]);
+        return res.status(200).json(rows);
+    }
+    if(id_aluno){
+        const [rows] = await db.execute("SELECT * FROM locacoes WHERE id_aluno = ?", [id_aluno]);
+        return res.status(200).json(rows);
+    }
+    return res.status(404).json({ message: "..." });
 }
 
 async function post(req, res) {
