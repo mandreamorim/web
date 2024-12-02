@@ -34,7 +34,7 @@ function consumir(search){
 
             livros.forEach(livro => {
                 // Definindo a URL da API
-                const url = new URL("http://localhost:3000/api/livros");
+                const url = new URL("/api/livros");
 
                 const params = {
                     capa: livro.capa,
