@@ -1,10 +1,10 @@
 import mysql from 'mysql2/promise';
 
 const db = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: '1234',
-    database: 'web'
+    host: 'sql10.freemysqlhosting.net',
+    user: 'sql10749069',
+    password: 'dcnKXmEYTK',
+    database: 'sql10749069'
 });
 
 export default db;
