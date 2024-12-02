@@ -13,7 +13,7 @@
             const livros = await response.json();
 
             // Limpar container antes de adicionar os livros
-            livrosContainer.innerHTML = '';
+            listaDeLivros.innerHTML = '';
 
             // Adicionar os livros ao container
             livros.forEach((livro, index) => {
@@ -32,7 +32,7 @@
         `;
 
                 // Adicionar o card ao container
-                livrosContainer.appendChild(card);
+                listaDeLivros.appendChild(card);
             });
         } catch (error) {
             console.error('Erro ao carregar livros:', error);

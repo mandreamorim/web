@@ -36,7 +36,7 @@ async function post(req, res) {
 }
 
 async function get(req, res){
-    const { id } = req.query;
+    const { id, search } = req.query;
     if (id) {
         const [rows] = await db.execute("SELECT * FROM livros WHERE id = ?", [id]);
         const livro = rows[0];
@@ -44,10 +44,17 @@ async function get(req, res){
             return res.status(404).json({ message: "Livro não encontrado" });
         }
         return res.status(200).json(livro);
-    } else {
-        const [livros] = await db.execute("SELECT * FROM livros limit 30");
-        return res.status(200).json(livros);
     }
+    if(search){
+        const [rows] = await db.execute("SELECT * FROM livros WHERE nome like concat('%', ?, '%') or autor like concat('%', ?, '%') limit 30", [search, search]);
+        const livro = rows[0];
+        if (!livro) {
+            return res.status(404).json({ message: "Nenhum livro encontrado" });
+        }
+        return res.status(200).json(rows);
+    }
+    const [livros] = await db.execute("SELECT * FROM livros limit 30");
+    return res.status(200).json(livros);
 }
 
 

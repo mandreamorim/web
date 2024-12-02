@@ -1,9 +1,6 @@
-describe('template spec', () => {
+describe('cadastro e login', () => {
   it('passes', () => {
-    //  cy.visit('http://localhost:3000/login.html')
-    //  cy.get('#email').type('liviamanoban6@gmail.com')
-    //   cy.get('#password').type('123456')
-    //   cy.get('.btn').click()
+
     cy.visit('http://localhost:3000/index.html')
     cy.get('.mobile-nav-toggle').click()
     /cy.get('#loginLink > a').click()
@@ -17,7 +14,10 @@ describe('template spec', () => {
      cy.get('.btn').click()
      cy.visit('http://localhost:3000/index.html')
     // cy.get('button').click()
-    
+       cy.visit('http://localhost:3000/login.html')
+       cy.get('#email').type('mandreamorim@gmail.com')
+        cy.get('#password').type('sapatoverde')
+        cy.get('.btn').click()
    
    
   })

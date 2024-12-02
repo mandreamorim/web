@@ -10,6 +10,47 @@ document.addEventListener("DOMContentLoaded", function() {
   updateLoginStatus();
 });
 
+async function carregarLivros(search) {
+  try {
+    const listaDeLivros = document.getElementById('livrosContainer');
+    // Fazer requisição à API
+    const response = await fetch(`/api/livros?search=${search}`);
+    const livros = await response.json();
+
+    // Limpar container antes de adicionar os livros
+    listaDeLivros.innerHTML = '';
+
+    // Adicionar os livros ao container
+    livros.forEach((livro, index) => {
+      // Criar o card para o livro
+      const card = document.createElement('div');
+      card.className = 'col-md-4 mb-4'; // Define 3 itens por linha no Bootstrap
+      card.innerHTML = `
+          <div class="card h-100" data-id="${livro.id}">
+            <img src="${livro.capa}" class="card-img-top" alt="${livro.nome}">
+            <div class="card-body">
+              <h5 class="card-title">${livro.nome}</h5>
+              <p class="card-text">Autor: ${livro.autor}</p>
+              <button class="btn btn-primary" onclick="salvarIdERedirecionar(this)">Alugar</button>
+            </div>
+          </div>
+        `;
+
+      // Adicionar o card ao container
+      listaDeLivros.appendChild(card);
+    });
+  } catch (error) {
+    console.error('Erro ao carregar livros:', error);
+  }
+}
+
+function search(){
+
+  let search = document.getElementById("searchBar").value.trim()
+  carregarLivros(search)
+
+}
+
 function logout(){
   localStorage.removeItem('UserId')
 }
